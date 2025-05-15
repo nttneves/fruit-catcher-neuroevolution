@@ -19,6 +19,12 @@ class DecisionTree:
             p = count / total
             entropy_value += p * np.log2(p)
         return -entropy_value
+        
+    def information_gain(self, y, y_left, y_right):
+        H_before = self.entropy(y)
+        H_left = self.entropy(y_left)
+        H_right = self.entropy(y_right)
+        return H_before - (len(y_left)/len(y)) * H_left - (len(y_right)/len(y)) * H_right
 
 
 def train_decision_tree(X, y):
