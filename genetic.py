@@ -12,4 +12,4 @@ def genetic_algorithm(individual_size, population_size, fitness_function, target
     
     # Complete the algorithm
 
-    return best_individual
+    return best_individual # This is expected to be a pair (individual, fitness)
