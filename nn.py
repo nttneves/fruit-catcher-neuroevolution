@@ -4,16 +4,28 @@ class NeuralNetwork:
 
     def __init__(self, input_size, hidden_architecture, hidden_activation, output_activation):
         self.input_size = input_size
-        # hidden_architecture is a tuple with the number of neurons in each hidden layer
-        # e.g. (5, 2) corresponds to a neural network with 2 hidden layers in which the first has 5 neurons and the second has 2
         self.hidden_architecture = hidden_architecture
-        # The activations are functions 
         self.hidden_activation = hidden_activation
         self.output_activation = output_activation
+        self.hidden_weights = []
+        self.hidden_biases = []
+        self.output_weights = None
+        self.output_bias = None
 
     def compute_num_weights(self):
-        # Implement this. Remember to account for the biases.
-        pass
+        total_weights = 0
+        input_size = self.input_size
+
+        # Hidden layers
+        for n_neurons in self.hidden_architecture:
+            # Pesos + bias para cada neurónio
+            total_weights += (input_size + 1) * n_neurons
+            input_size = n_neurons
+
+        # Output layer (1 neurónio)
+        total_weights += input_size + 1
+
+        return total_weights
 
     def load_weights(self, weights):
         w = np.array(weights)
@@ -24,25 +36,40 @@ class NeuralNetwork:
         start_w = 0
         input_size = self.input_size
         for n in self.hidden_architecture:
-            end_w = start_w + (input_size + 1) * n
-            self.hidden_biases.append(w[start_w:start_w+n])
-            self.hidden_weights.append(w[start_w+n:end_w].reshape(input_size, n))
+            # biases
+            self.hidden_biases.append(w[start_w:start_w + n])
+            start_w += n
+            # weights
+            end_w = start_w + input_size * n
+            self.hidden_weights.append(w[start_w:end_w].reshape(input_size, n))
             start_w = end_w
             input_size = n
 
+        # output layer
         self.output_bias = w[start_w]
-        self.output_weights = w[start_w+1:]
-
+        start_w += 1
+        self.output_weights = w[start_w:start_w + input_size]
 
     def forward(self, x):
-        # Implement this
-        pass
-        
+        a = np.array(x)
+
+        # Passagem pelas camadas escondidas
+        for W, b in zip(self.hidden_weights, self.hidden_biases):
+            a = self.hidden_activation(np.dot(a, W) + b)
+
+        # Camada de saída
+        output = np.dot(a, self.output_weights) + self.output_bias
+        return self.output_activation(output)
+
 
 def create_network_architecture(input_size):
+    # ⬇️ Perceptron (sem camadas escondidas)
+    # hidden_arch = ()
 
-    # Replace with your configuration
+    # ⬇️ Feedforward com 1 camada escondida de 5 neurónios
+    hidden_arch = (5,)
 
-    hidden_fn = lambda x: 1 / (1 + np.exp(-x))
-    output_fn = lambda x: 1 if x > 0 else -1
-    return NeuralNetwork(input_size, (), hidden_fn, output_fn)
+    hidden_fn = lambda x: 1 / (1 + np.exp(-x))  # Sigmóide
+    output_fn = lambda x: 1 if x > 0 else -1    # Sinal
+
+    return NeuralNetwork(input_size, hidden_arch, hidden_fn, output_fn)

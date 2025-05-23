@@ -1,10 +1,5 @@
 # 🤝 GUIA COMPLETO DE COLABORAÇÃO NO PROJETO COM GIT, GITHUB E VS CODE
-
----
-
-## 📘 1. Começar com Git e GitHub
-
-### ✅ Primeira vez que usas o projeto:
+# ✅ Primeira vez que usas o projeto:
 
 ```bash
 git clone https://github.com/nttneves/AI-Project.git

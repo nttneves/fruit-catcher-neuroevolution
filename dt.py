@@ -92,7 +92,8 @@ class DecisionTree:
             'left': self.build_tree(X_left, y_left, depth + 1),
             'right': self.build_tree(X_right, y_right, depth + 1)
         }
-    def train_decision_tree(X, y):
-        # Replace with your configuration
-        return DecisionTree(X, y)
+    
+def train_decision_tree(X, y):
+    # Replace with your configuration
+    return DecisionTree(X, y)
 
