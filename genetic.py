@@ -13,8 +13,12 @@ def crossover(parent1, parent2):
 def mutate(individual, mutation_rate):
     return [gene + random.uniform(-0.5, 0.5) if random.random() < mutation_rate else gene for gene in individual]
 
-def genetic_algorithm(individual_size, population_size, fitness_function, target_fitness, generations, elite_rate=0.2, mutation_rate=0.05):
-    population = generate_population(individual_size, population_size)
+def genetic_algorithm(individual_size, population_size, fitness_function, target_fitness, generations, elite_rate=0.2, mutation_rate=0.05, initial_individual=None):
+    population = generate_population(individual_size, population_size - 1)
+    if initial_individual:
+        population.append(initial_individual)
+    else:
+        population.append(create_individual(individual_size))
     best_individual = None
     best_fitness = float('-inf')
 

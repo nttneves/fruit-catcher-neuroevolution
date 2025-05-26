@@ -24,7 +24,13 @@ def train_ai_player(filename, population_size, generations):
 
     fitness_function = lambda individual, seed=None: fitness(nn, individual, seed)
 
-    best = genetic_algorithm(individual_size, population_size, fitness_function, MAX_SCORE, generations)
+    file_path = Path(filename)
+    initial = None
+    if file_path.exists():
+        with open(filename, 'r') as f:
+            initial = list(map(float, f.read().split(',')))
+
+    best = genetic_algorithm(individual_size, population_size, fitness_function, MAX_SCORE, generations, initial_individual=initial)
     print(best)
     with open(filename, 'w') as f:
         f.write(','.join(map(str, best[0])))
