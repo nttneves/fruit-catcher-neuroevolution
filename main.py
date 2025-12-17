@@ -94,7 +94,7 @@ def main():
         return
 
     ai_player = load_ai_player(args.file)
-    fruit_classifier = train_fruit_classifier('train.csv')
+    fruit_classifier = train_fruit_classifier('data/train.csv')
 
     if args.headless:
         score = get_score(ai_player, fruit_classifier)

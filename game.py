@@ -31,7 +31,7 @@ basket_img = pygame.image.load('images/basket.png')
 basket_img = pygame.transform.scale(basket_img, (150, 100))
 
 item_types = {}
-with open('items.csv', 'r') as f:
+with open('data/items.csv', 'r') as f:
     reader = csv.DictReader(f, delimiter=';')
     for i in reader:
         id = int(i.pop('id'))
