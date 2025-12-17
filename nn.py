@@ -63,10 +63,10 @@ class NeuralNetwork:
 
 
 def create_network_architecture(input_size):
-    # ⬇️ Perceptron (sem camadas escondidas)
+    # Perceptron (sem camadas escondidas)
     # hidden_arch = ()
 
-    # ⬇️ Feedforward com 1 camada escondida de 5 neurónios
+    # Feedforward com 1 camada escondida de 5 neurónios
     hidden_arch = (5,)
 
     hidden_fn = lambda x: 1 / (1 + np.exp(-x))  # Sigmóide
