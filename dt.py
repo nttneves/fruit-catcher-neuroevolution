@@ -1,4 +1,3 @@
-# dt.py
 import math
 from collections import Counter, defaultdict
 
