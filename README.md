@@ -109,14 +109,6 @@ It is used online by the agent during gameplay to label falling objects.
 ```
 ---
 
-## Requirements
-
-- Python 3.10 or higher
-- numpy
-- pygame
-
----
-
 ## How to Run
 
 ### Train the AI agent
@@ -156,4 +148,5 @@ python main.py --headless
 ## License
 
 This project was developed as an academic work.
+
 
