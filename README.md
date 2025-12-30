@@ -143,6 +143,7 @@ python main.py --headless
 ## Authors
 
 - Nuno Neves
+
 - Beatriz Nunes
 
 ## License
